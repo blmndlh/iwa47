@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<!-- Load plotly.js into the DOM -->
@@ -7,25 +6,101 @@
 </head>
 
 <body>
-	<div id="myDiv" style="width:100%;max-width:700px"></div>
+	<div id="myDiv" style="width:100%"></div>
 
 	<script>
-		d3.csv('iwa47.csv', function(err, rows){
-			function unpack(rows, key) {
-			return rows.map(function(row) { return row[key]});
+		var ids = [
+			"42",
+			"74",
+			"59",
+			"60",
+			"61",
+			"1",
+			"2",
+			"3",
+			"4",
+			"63",
+			"64",
+			"62"
+		]
+		var labels =  [
+			"Strategic", 
+			"Working capital management", 
+			"Core", 
+			"Core reference data management", 
+			"Semantic interoperability", 
+			"Data Type Definition management", 
+			"Geopolitical context dependent data types", 
+			"UoM definitions, conversions management", 
+			"Semantic resource mapping", 
+			"Data quality measure management", 
+			"Metadata type management", 
+			"Product reference data management (seeds, crop protection, fertilizer)"
+		]
+		var	parents = [
+			"", 
+			"42", 
+			"", 
+			"59", 
+			"60", 
+			"61", 
+			"61", 
+			"61", 
+			"61", 
+			"61", 
+			"61", 
+			"61", 
+			"60" 
+		]
+		var text = [
+			"description 1",
+			"description 2",
+			"description 3",
+			"description 4",
+			"description 5",
+			"description 6",
+			"description 7",
+			"description 8",
+			"description 9",
+			"description 10",
+			"description 11",
+			"description 12"
+		]
+		
+		var data = [
+			{
+				type: "treemap",
+				ids: ids,
+				labels: labels,
+				parents: parents,
+				text: text,
+				packing: "binary",
+				textinfo: "label+text",
+				outsidetextfont: {"size": 20, "color": "#377eb8"},
+				marker: {"line": {"width": 2}},
+				pathbar: {"visible": true}
+			}
+		];
+		var layout = {
+			annotations: [
+			{
+				showarrow: false,
+				text: "branchvalues: <b>remainder</b>",
+				x: 0.25,
+				xanchor: "center",
+				y: 1.1,
+				yanchor: "bottom"
+			}, {
+				showarrow: false,
+				text: "branchvalues: <b>total</b>",
+				x: 0.75,
+				xanchor: "center",
+				y: 1.1,
+				yanchor: "bottom"
+			}]
 		}
 
-		var data = [{
-			type: "treemap",
-			ids: unpack(rows, 'ids'),
-//			labels: ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
-//			parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ]
-			labels: unpack(rows, 'labels'),
-			parents: unpack(rows, 'parents')
-		}];
-
-
-		Plotly.newPlot('myDiv', data);
+		Plotly.newPlot('myDiv', data, layout);
 	</script>
 </body>
 </html>
