@@ -1,32 +1,29 @@
+<!DOCTYPE html>
+<html>
 <head>
 	<!-- Load plotly.js into the DOM -->
-	<script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
-	<!DOCTYPE html>
-<html>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<body>
+	<script>
+//		d3.csv('c:\\home\\github\\iwa47\\iwa47.csv', function(err, rows){
+//			function unpack(rows, key) {
+//			return rows.map(function(row) { return row[key]});
+//		}
 
-<div id="myPlot" style="width:100%;max-width:700px"></div>
+		var data = [{
+			type: "treemap",
+//			ids: unpack(rows, 'ids'),
+			labels: ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+			parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ]
+//			labels: unpack(rows, 'labels'),
+//			parents: unpack(rows, 'parents')
+		}];
 
-<script>
-const xArray = ["Italy", "France", "Spain", "USA", "Argentina"];
-const yArray = [55, 49, 44, 24, 15];
 
-const data = [{
-  x:xArray,
-  y:yArray,
-  type:"bar",
-  orientation:"v",
-  marker: {color:"rgba(0,0,255,0.6)"}
-}];
-
-const layout = {title:"World Wide Wine Production"};
-
-Plotly.newPlot("myPlot", data, layout);
-</script>
+		Plotly.newPlot('myDiv', data);
+	</script>
 </head>
 
 <body>
-	<div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+	<div id="myDiv" style="width:100%;max-width:700px"></div>
 </body>
